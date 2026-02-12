@@ -2,65 +2,69 @@ import { View, Text, ScrollView, Image, StyleSheet, TouchableOpacity } from "rea
 import { colors, globalStyles as s } from "@/styles/global";
 
 const POSTS = [
-    { id: "1", uri: "https://picsum.photos/seed/d1/400/400" },
-    { id: "2", uri: "https://picsum.photos/seed/d2/400/400" },
-    { id: "3", uri: "https://picsum.photos/seed/d3/400/400" },
-    { id: "4", uri: "https://picsum.photos/seed/d4/400/400" },
-    { id: "5", uri: "https://picsum.photos/seed/d5/400/400" },
-    { id: "6", uri: "https://picsum.photos/seed/d6/400/400" },
-    { id: "7", uri: "https://picsum.photos/seed/d7/400/400" },
-    { id: "8", uri: "https://picsum.photos/seed/d8/400/400" },
-    { id: "9", uri: "https://picsum.photos/seed/d9/400/400" },
+    { id: "1", uri: "https://picsum.photos/seed/e1/400/400" },
+    { id: "2", uri: "https://picsum.photos/seed/e2/400/400" },
+    { id: "3", uri: "https://picsum.photos/seed/e3/400/400" },
+    { id: "4", uri: "https://picsum.photos/seed/e4/400/400" },
+    { id: "5", uri: "https://picsum.photos/seed/e5/400/400" },
+    { id: "6", uri: "https://picsum.photos/seed/e6/400/400" },
 ];
 
 export default function ProfileScreen() {
     return (
         <ScrollView contentContainerStyle={[s.container, styles.profileContainer]}>
-            {/* Cabeçalho: avatar à esquerda, nome + stats à direita */}
-            <View style={styles.header}>
+            {/* Avatar centralizado no topo */}
+            <View style={styles.topSection}>
                 <Image
-                    source={{ uri: "https://picsum.photos/seed/davi/200/200" }}
+                    source={{ uri: "https://picsum.photos/seed/eduardo/200/200" }}
                     style={styles.avatar}
                 />
-                <View style={styles.headerRight}>
-                    <Text style={styles.displayName}>Davi</Text>
-                    <Text style={styles.username}>@davi.codes</Text>
-                    <View style={styles.statsInline}>
-                        <Text style={styles.statText}><Text style={styles.statBold}>18</Text> posts</Text>
-                        <Text style={styles.statDot}> · </Text>
-                        <Text style={styles.statText}><Text style={styles.statBold}>847</Text> seguidores</Text>
-                        <Text style={styles.statDot}> · </Text>
-                        <Text style={styles.statText}><Text style={styles.statBold}>312</Text> seguindo</Text>
-                    </View>
+                <Text style={styles.displayName}>Eduardo</Text>
+                <Text style={styles.username}>@eduardo.dev</Text>
+            </View>
+
+            {/* Stats em 3 caixinhas */}
+            <View style={styles.statsRow}>
+                <View style={styles.statBox}>
+                    <Text style={styles.statNumber}>56</Text>
+                    <Text style={styles.statLabel}>Publicações</Text>
+                </View>
+                <View style={styles.statBox}>
+                    <Text style={styles.statNumber}>3.2k</Text>
+                    <Text style={styles.statLabel}>Seguidores</Text>
+                </View>
+                <View style={styles.statBox}>
+                    <Text style={styles.statNumber}>289</Text>
+                    <Text style={styles.statLabel}>Seguindo</Text>
                 </View>
             </View>
 
-            {/* Bio em faixa colorida */}
-            <View style={styles.bioStrip}>
-                <Text style={styles.bio}>
-                    Front-end dev · React & React Native · Rio de Janeiro 🌴
-                </Text>
+            {/* Bio simples */}
+            <Text style={styles.bio}>
+                UX Designer & Dev · Belo Horizonte 🏔️
+                {"\n"}
+                <Text style={styles.bioLink}>eduardo.design</Text>
+            </Text>
+
+            {/* Botão Seguir + ícone opções */}
+            <View style={styles.actionsRow}>
+                <TouchableOpacity style={styles.followButton} activeOpacity={0.8}>
+                    <Text style={s.textWhite}>Seguir</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.moreButton} activeOpacity={0.8}>
+                    <Text style={styles.moreButtonText}>⋯</Text>
+                </TouchableOpacity>
             </View>
 
-            {/* Botão Seguir (pill) */}
-            <TouchableOpacity style={styles.followButton} activeOpacity={0.8}>
-                <Text style={s.textWhite}>Seguir</Text>
-            </TouchableOpacity>
-
-            {/* 3 abas estilo minimalista */}
+            {/* Aba Publicações */}
             <View style={styles.tabs}>
                 <View style={[styles.tab, styles.tabActive]}>
-                    <Text style={styles.tabText}>⊞</Text>
-                </View>
-                <View style={styles.tab}>
-                    <Text style={[styles.tabText, styles.tabTextInactive]}>▶</Text>
-                </View>
-                <View style={styles.tab}>
-                    <Text style={[styles.tabText, styles.tabTextInactive]}>◇</Text>
+                    <Text style={styles.tabIcon}>⊞</Text>
+                    <Text style={styles.tabLabel}>Publicações</Text>
                 </View>
             </View>
 
-            {/* Grade 3 colunas */}
+            {/* Grade 2 colunas com cantos arredondados */}
             <View style={styles.grid}>
                 {POSTS.map((post) => (
                     <View key={post.id} style={styles.gridItem}>
@@ -74,110 +78,141 @@ export default function ProfileScreen() {
 
 const styles = StyleSheet.create({
     profileContainer: {
-        paddingHorizontal: 16,
+        paddingHorizontal: 20,
         paddingBottom: 40,
     },
-    header: {
-        flexDirection: "row",
+    topSection: {
         alignItems: "center",
-        marginBottom: 16,
+        marginTop: 12,
+        marginBottom: 20,
     },
     avatar: {
-        width: 80,
-        height: 80,
-        borderRadius: 40,
+        width: 96,
+        height: 96,
+        borderRadius: 48,
         backgroundColor: colors.white,
-        borderWidth: 2,
-        borderColor: colors.teal,
-    },
-    headerRight: {
-        flex: 1,
-        marginLeft: 20,
+        borderWidth: 3,
+        borderColor: colors.orange,
     },
     displayName: {
-        fontSize: 18,
+        fontSize: 22,
         fontWeight: "700",
         color: colors.dark,
+        marginTop: 14,
     },
     username: {
-        fontSize: 13,
+        fontSize: 14,
         color: colors.gray,
-        marginTop: 2,
+        marginTop: 4,
     },
-    statsInline: {
+    statsRow: {
         flexDirection: "row",
-        flexWrap: "wrap",
-        alignItems: "center",
-        marginTop: 8,
-    },
-    statText: {
-        fontSize: 13,
-        color: colors.gray,
-    },
-    statBold: {
-        fontWeight: "700",
-        color: colors.dark,
-    },
-    statDot: {
-        fontSize: 13,
-        color: colors.gray,
-    },
-    bioStrip: {
-        backgroundColor: colors.teal,
-        marginHorizontal: -16,
-        paddingVertical: 12,
-        paddingHorizontal: 20,
+        gap: 8,
         marginBottom: 16,
     },
+    statBox: {
+        flex: 1,
+        backgroundColor: colors.white,
+        borderRadius: 10,
+        paddingVertical: 14,
+        alignItems: "center",
+        elevation: 2,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.06,
+        shadowRadius: 3,
+    },
+    statNumber: {
+        fontSize: 18,
+        fontWeight: "800",
+        color: colors.dark,
+    },
+    statLabel: {
+        fontSize: 11,
+        color: colors.gray,
+        marginTop: 4,
+    },
     bio: {
-        fontSize: 13,
-        color: colors.white,
-        lineHeight: 20,
+        fontSize: 14,
+        color: colors.dark,
+        lineHeight: 22,
+        marginBottom: 16,
         textAlign: "center",
     },
+    bioLink: {
+        color: colors.orange,
+        fontWeight: "600",
+    },
+    actionsRow: {
+        flexDirection: "row",
+        gap: 10,
+        marginBottom: 24,
+    },
     followButton: {
-        backgroundColor: colors.teal,
+        flex: 1,
+        backgroundColor: colors.orange,
         paddingVertical: 10,
-        borderRadius: 24,
+        borderRadius: 10,
         alignItems: "center",
         justifyContent: "center",
-        marginBottom: 20,
+    },
+    moreButton: {
+        width: 44,
+        height: 44,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: "#d1d5db",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    moreButtonText: {
+        fontSize: 20,
+        color: colors.dark,
+        fontWeight: "600",
     },
     tabs: {
         flexDirection: "row",
-        marginBottom: 4,
+        borderTopWidth: 1,
+        borderTopColor: "#e5e7eb",
+        marginHorizontal: -20,
     },
     tab: {
         flex: 1,
+        flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        paddingVertical: 10,
+        gap: 6,
+        paddingVertical: 12,
     },
     tabActive: {
-        borderBottomWidth: 3,
-        borderBottomColor: colors.teal,
+        borderTopWidth: 3,
+        borderTopColor: colors.orange,
+        marginTop: -1,
     },
-    tabText: {
-        fontSize: 20,
-        color: colors.teal,
+    tabIcon: {
+        fontSize: 18,
+        color: colors.orange,
     },
-    tabTextInactive: {
-        color: colors.gray,
-        opacity: 0.6,
+    tabLabel: {
+        fontSize: 13,
+        fontWeight: "600",
+        color: colors.dark,
     },
     grid: {
         flexDirection: "row",
         flexWrap: "wrap",
-        marginHorizontal: -2,
+        marginHorizontal: -4,
+        marginTop: 0,
     },
     gridItem: {
-        width: "33.333%",
+        width: "50%",
         aspectRatio: 1,
-        padding: 2,
+        padding: 4,
     },
     gridImage: {
         width: "100%",
         height: "100%",
+        borderRadius: 16,
         backgroundColor: colors.gray,
     },
 });
